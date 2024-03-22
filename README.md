@@ -1,6 +1,12 @@
 ## Summary
 This research explores the relationship between Intrusion Detection Systems (IDS) and network routing optimization, aiming to enhance network resilience and efficiency. By proposing a methodology that integrates machine learning techniques, specifically tailored for network routing, the study demonstrates improved routing accuracy using a custom feature set derived from extensive analysis. Utilizing datasets like UNSW-NB15 and NSL-KDD, a lightweight Feed-Forward Neural Network (FFNN) is trained to predict network behavior, showcasing the efficacy of the proposed approach. The findings suggest promising opportunities for optimizing network performance by integrating machine learning-based IDS with routing protocols in real-world networking environments.
 
+**Paper Link:** [Link to Paper](https://www.mdpi.com/2624-800X/3/3/23)
+
+**UNSW-NB15 Dataset:** [Link to UNSW-NB15 Dataset](https://www.kaggle.com/datasets/mrwellsdavid/unsw-nb15)
+
+**NSL-KDD Dataset:** [Link to NSL-KDD Dataset](https://www.kaggle.com/datasets/hassan06/nslkdd)
+
 ## Improved Outcomes and Methodologies
 
 We obtained improved outcomes on both the NSL-KDD and UNSW-NB15 datasets through the utilization of our customized feature set. Our approach builds upon the work of Ghani et al[11] by initially scrutinizing the features selected using the fruit fly algorithm, while also considering previously overlooked features. Additionally, we integrate an information gain feature selection algorithm to enhance our understanding of the probability distribution of features within both datasets and facilitate our feature selection process.
