@@ -8,50 +8,6 @@ We obtained improved outcomes on both the NSL-KDD and UNSW-NB15 datasets through
 ### Fruit Fly Algorithm
 
 In the study conducted by Ghani et al.[11], the Fruit Fly Optimization Algorithm (FFA) was utilized to identify feature subsets for the UNSW-NB15 and NSL-KDD datasets, resulting in the selection of 9 and 11 features respectively. FFA, inspired by swarm behavior, is employed to address intricate optimization tasks like feature selection. Within this domain, FFA systematically explores various feature combinations to pinpoint the subset that offers the most pertinent information for achieving optimal performance. Through iterative assessment of feature subsets' fitness and adjustment of their selection probabilities, FFA adeptly traverses the feature space to pinpoint the most relevant subset for the specific task at hand. Our research extends this approach by re-implementing the Fruit Fly Algorithm, tailored to our dataset, and identifying features as detailed in the table provided.
-
-#### UNSW-NB15
-* spkts
-* sbytes
-* sttl
-* dload
-* swin
-* stcpb
-* dtcpb
-* tcprtt
-* dmean
-* trans_depth
-* response_bodylen
-* ct_srv_src
-* ct_state
-* ttl
-* ct_srcdport_ltm
-* ct_dst_src_ltm
-* is_ftp_login
-* ct_flw_http_mthd
-* is_sm_ips_ports
-
-#### NSL-KDD
-* protocol_type
-* service
-* flag
-* src_bytes
-* wrong_fragment
-* num_failed_logins
-* logged_in
-* root_shell
-* su_attempted
-* num_file_creations
-* num_shells
-* is_host_login
-* is_guest_login
-* serror_rate
-* same_srv_rate
-* diff_srv_rate
-* srv_diff_host_rate
-* dst_host_count
-* dst_host_same_src_port_rate
-* dst_host_rerror_rate
-
 Given the stochastic nature of the Fruit Fly Algorithm, which draws upon principles akin to the random forest classifier, it is anticipated that each execution may yield different outcomes. To accommodate the size of our dataset, we incorporated a sampling strategy during implementation. Despite this, the outcomes are not compromised, as the sampled data serves solely as a reference for constructing our customized feature set. Additionally, we consider the feature sets previously identified by Ghani et al[11] in our analysis.
 
 ### Information Gain
@@ -65,3 +21,17 @@ Multilayer Perceptron (MLP) is a fundamental type of artificial neural network c
 ### Feature Selection
 
 After employing fruit fly and information gain algorithms for feature selection, our research delves into a meticulous examination of features within both datasets. Initial observations reveal striking similarities in the features present in both datasets. However, distinct attack categories in each dataset played a pivotal role in our feature selection process. Our approach commenced with the elimination of highly correlated features within each dataset, a decision made after thorough consideration of their potential implications. While the removal of these features carries the risk of introducing bias to the dataset, such a scenario is deemed highly improbable given the inherent nature of the features. The subsequent paragraphs provide a detailed account of the feature selection methodology employed for each dataset.
+
+## Summary of Findings
+
+Our findings reveal that employing feature selection algorithms leads to the exclusion of pivotal features that could otherwise enhance model accuracy. In the case of the NSL-KDD dataset, we utilized 5 features as opposed to Ghani et al.'s[11] 11 features, resulting in a more accurate model. Similarly, our refined feature selection method for the UNSW-NB15 dataset only necessitated 6 features, compared to Ghani et al.'s[11] 9 features, yet yielded superior results. The subsequent paragraphs delve into a detailed discussion of the features instrumental in achieving these outcomes.
+
+The features proposed by Ghani et al. [11], employing the fruit fly algorithm, lacked certain crucial elements contributing to accuracy, as evidenced by our findings. We observed a notable enhancement in accuracy upon incorporating the duration (dur) feature. Various attacks, such as DDoS, reconnaissance, and brute-force attacks, often demonstrate distinctive duration patterns detectable through duration analysis. Our custom feature set encompasses packet counts (spkts) and data transfer rates (sload), offering a comprehensive perspective on network activity. In contrast, Ghani et al.'s [11] fruit fly feature set, relying on Service type (service), response body length (res_bdy_len), and FTP login status (is_ftp_login), may not adequately capture characteristics indicative of attack behaviors. Our rationale is reinforced by the accuracy improvement observed when utilizing our customized feature set within the same model framework.
+
+| Research           | Dataset    | Features                                           | Accuracy |
+|--------------------|------------|----------------------------------------------------|----------|
+| Ghani et al. [11]  | UNSW-NB15  | Service, Dload, Ackdat, Dmeans, Smeans, res_bdy_len, ct_state_ttl, is_ftp_login, ct_src_ltm | 91.29% |
+| Proposed Research  | UNSW-NB15  | dur, spkts, sload, smean, dmean, ct_srv_src       | 92.20% |
+| Ghani et al. [11]  | NSL-KDD    | Service, dst_host_srv_rerror_rate, Flag, Src_bytes, Su_attempted, Num_failed_logins, Is_guest_login, Count, Srv_rerror_rate, Srv_diff_host_rate, Dst_host_same_src_port_rare | 91.62% (89.03%) |
+| Proposed Research  | NSL-KDD    | Diff_srv_rate, Same_srv_rate, Service, Dst_bytes, src_bytes | 95.14%   |
+
